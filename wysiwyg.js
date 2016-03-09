@@ -1,4 +1,7 @@
-var person = document.getElementById("person")
+var person = document.getElementById("person");
+var input = document.getElementById("userInput");
+
+//Create an array of objects that represents famous people
 var people = [
   {
     title: "Musician",
@@ -52,10 +55,13 @@ var people = [
   }
 ];
 
+//Create a DOM element for each of the objects inside the container. Style your person elements however you like.
 for (i = 0; i < people.length; i++) {
-  person.innerHTML += "<div class = 'personCard'>" + `<h1>${people[i].name}</h1>` + `<h3>${people[i].title}</h3>` + `<p>${people[i].bio}<p>` + "<img src=" + people[i].image + ">" + `<text>${people[i].lifespan.birth}<text>` + " - " + `<text>${people[i].lifespan.death}<text>` + "</div>";
+  person.innerHTML += "<div class = 'personCard'>" + `<h1>${people[i].name}</h1>` + `<h3>${people[i].title}</h3>` + `<p id="bio">${people[i].bio}<p>` + "<img src=" + people[i].image + ">" + `<text>${people[i].lifespan.birth}<text>` + " - " + `<text>${people[i].lifespan.death}<text>` + "</div>";
+var bioText = people[i].bio;
 }
 
+//When you click on one of the person elements, a dotted border should appear around it.
 var childrenEl = person.childNodes
 
 for (i = 0; i < people.length; i++) {
@@ -63,16 +69,27 @@ for (i = 0; i < people.length; i++) {
     var childEl = event.target.parentNode.closest("div");
     childEl.classList.toggle("dotted")
   })
+  
 };
 
+//When you click on one of the person elements, the text input should immediately gain focus so that you can start typing.
+for (i = 0; i < people.length; i++) {
+  childrenEl[i].addEventListener("click", function() {
+    document.forms["myForm"].elements["userInput"].focus();
+  });
+}
 
+//When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
 
-
-
-
-
-
-
+  var bioCont = document.getElementById("bio")
+  input.addEventListener("keyup", function() {
+    var text = input.value;
+    bioCont.innerHTML = text ;
+    if (text === '') {
+       bioCont.innerHTML = bioText;
+    };
+  })
+  
 
 
 
