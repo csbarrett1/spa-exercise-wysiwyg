@@ -62,11 +62,10 @@ var bioText = people[i].bio;
 }
 
 //When you click on one of the person elements, a dotted border should appear around it.
-var childrenEl = person.childNodes
-
+var childrenEl = person.childNodes;
 for (i = 0; i < people.length; i++) {
   childrenEl[i].addEventListener("click", function(event) {
-    var childEl = event.target.parentNode.closest("div");
+    var childEl = event.target.closest("div");
     childEl.classList.toggle("dotted")
   })
 };
@@ -76,7 +75,7 @@ for (i = 0; i < people.length; i++) {
   childrenEl[i].addEventListener("click", function() {
     document.forms["myForm"].elements["userInput"].focus();
   });
-}
+};
 
 //When there is a highlighted person element, and you begin typing in the input box, the person's biography should be immediately bound to what you are typing, letter by letter.
 
